@@ -24,14 +24,25 @@
 
 ## 安装
 
+### 双击安装（推荐）
+
+1. 本页右上角 **Code → Download ZIP**
+2. 解压到任意目录（路径里别带空格和中文，省得踩坑）
+3. 双击 **`一键安装.bat`**
+4. 看到「安装完成」就好了
+
+安装器会自动检查 Python、装依赖、注册定时任务，并立即刷新一次。之后每 6 小时自动跑，全程无窗口。
+
+**卸载**：双击 `卸载.bat`。
+
+### 或者用命令行
+
 ```powershell
 git clone https://github.com/Debuger-114514/netease-back-to-cn.git
 cd netease-back-to-cn
 pip install -r requirements.txt
 pwsh -File install_task.ps1
 ```
-
-装完就结束了。之后每 6 小时自动跑一次，全程无窗口。
 
 ---
 

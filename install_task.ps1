@@ -57,8 +57,12 @@ $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries `
     -ExecutionTimeLimit (New-TimeSpan -Minutes 30) `
     -MultipleInstances IgnoreNew
 
+# 先删再建：任务已存在时直接用 -Force 覆盖会被系统拒绝（拒绝访问），
+# 这里做成幂等，重复运行安装器也安全。
+Unregister-ScheduledTask -TaskName $TASK -Confirm:$false -ErrorAction SilentlyContinue
+
 Register-ScheduledTask -TaskName $TASK -Action $action -Trigger $trigger `
-    -Settings $settings -Force | Out-Null
+    -Settings $settings | Out-Null
 
 $i = Get-ScheduledTaskInfo -TaskName $TASK
 Write-Host ""
